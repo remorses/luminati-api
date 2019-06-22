@@ -1,6 +1,8 @@
 import { strict as assert } from 'assert'
 import {createClient} from '../index'
 
+const log = console.log
+
 const {
     email,
     password,
@@ -48,6 +50,7 @@ it('removeIps', async() => {
         password,
         customer,
     })
-    const ip = await client.availableIps({zone, zonePassword})[0]
+    const ip = (await client.availableIps({zone, zonePassword}))[0]
+    log('removing ' + ip)
     await client.removeIps({ips: [ip], zone}).then(console.log)
 })
