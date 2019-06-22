@@ -15,6 +15,7 @@ steps:
       - echo "$env" > .env
       - npm ci
       - npm test
+      - npx tsc
       
   - name: bump
     image: xplugins/bump
@@ -36,8 +37,6 @@ steps:
   #       from_secret: docker_password
   - name: npm
     image: plugins/npm
-    commands:
-      - npx tsc
     settings:
       username: xmorse
       password:
