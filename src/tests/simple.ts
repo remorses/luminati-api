@@ -48,6 +48,6 @@ it('removeIps', async() => {
         password,
         customer,
     })
-    const ips = await client.availableIps({zone, zonePassword})
+    const ips = await client.availableIps({zone, zonePassword})[0]
     await client.removeIps({ips, zone}).then(console.log)
 })
