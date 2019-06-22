@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "publish": "tsc && npm publish",
-    "test": "mocha --require ts-node/register --timeout 10000 src/tests/* --colors"
+    "test": ". .env && mocha --require ts-node/register --timeout 10000 src/tests/* --colors"
   },
   "keywords": [],
   "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
@@ -18,5 +18,9 @@
     "mocha": "^6.1.4",
     "ts-node": "^8.2.0",
     "typescript": "^3.5.1"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.3.7",
+    "node-fetch": "^2.6.0"
   }
 }
