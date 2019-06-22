@@ -15,7 +15,7 @@ const client = createClient({
 
 client.addIps({
     zone: 'my_zone', 
-    zonePassword: '*******, 
+    zonePassword: '*******', 
     count: 1,
 })
 .then(newIps => {
