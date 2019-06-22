@@ -7,7 +7,7 @@ yarn-error.log*
 .DS_Store
 
 dist/*
-
+play
 # Runtime data
 pids
 *.pid
