@@ -5,8 +5,9 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
-    "pub": "npx tsc && npm publish",
+    "pub": "sc && npm publish",
     "test": ". .env && mocha --require ts-node/register --timeout 10000 src/tests/* --colors"
   },
   "keywords": [],
