@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import base64 from 'base-64'
 import { log, parse } from './support'
 
 const mapErrorToJson = async (res) => {
@@ -33,7 +34,8 @@ export interface Client {
 export const createClient = ({ email, password, customer }): Client => {
     const defaults = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + base64.encode(email + ":" + password),
         },
         method: 'POST'
     }
@@ -47,11 +49,9 @@ export const createClient = ({ email, password, customer }): Client => {
         return await fetch('https://luminati.io/api/add_ips', {
             ...defaults,
             body: JSON.stringify({
-                email,
-                password,
                 customer,
                 zone,
-                count: 1
+                count
             })
         })
             .then(mapErrorToJson)
@@ -69,6 +69,7 @@ export const createClient = ({ email, password, customer }): Client => {
         return fetch('https://luminati.io/api/get_route_ips?expand=1', {
             ...defaults,
             headers: {
+                ...defaults.headers,
                 'Content-Type': 'application/json',
                 'X-Hola-Auth': `lum-customer-${customer}-zone-${zone}-key-${zonePassword}`
             },
@@ -93,8 +94,6 @@ export const createClient = ({ email, password, customer }): Client => {
         return fetch('https://luminati.io/api/remove_ips', {
             ...defaults,
             body: JSON.stringify({
-                email,
-                password,
                 customer,
                 zone,
                 ips
@@ -119,8 +118,6 @@ export const createClient = ({ email, password, customer }): Client => {
         return fetch('https://luminati.io/api/refresh', {
             ...defaults,
             body: JSON.stringify({
-                email,
-                password,
                 customer,
                 zone,
                 ips

@@ -1,12 +1,12 @@
 {
   "name": "luminati-api",
   "_": "[bump]",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "publish": "npx tsc && npm publish",
+    "pub": "npx tsc && npm publish",
     "test": ". .env && mocha --require ts-node/register --timeout 10000 src/tests/* --colors"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
+    "base-64": "^0.1.0",
     "node-fetch": "^2.6.0"
   }
 }
