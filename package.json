@@ -4,6 +4,7 @@
   "version": "1.1.0",
   "description": "",
   "main": "dist/index.js",
+  "files": ["/dist/*"],
   "types": "dist/index.d.ts",
   "scripts": {
     "pub": "npx tsc && npm publish",
