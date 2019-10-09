@@ -2,7 +2,7 @@
   "name": "luminati-api",
   "_": "[bump]",
   "version": "1.6.1",
-  "description": "",
+  "description": "Luminati Unofficial API",
   "main": "dist/index.js",
   "files": ["/dist/*"],
   "types": "dist/index.d.ts",
