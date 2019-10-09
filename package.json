@@ -1,6 +1,6 @@
 {
   "name": "luminati-api",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "Luminati Unofficial API",
   "main": "dist/index.js",
   "files": [
