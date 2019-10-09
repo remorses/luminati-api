@@ -16,6 +16,7 @@ jobs:
       - run: tsc && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+      - run: npm version patch
       - name: Bump version
         uses: remorses/bump-version@js
         with:
