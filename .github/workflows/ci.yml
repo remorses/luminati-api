@@ -16,13 +16,14 @@ jobs:
       - run: tsc && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+      - run: npm version --no-git-tag-version patch
       - name: Bump version
         uses: remorses/bump-version@js
         with:
           version_file: VERSION
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm version --no-git-tag-version patch
+      
 
 
 
