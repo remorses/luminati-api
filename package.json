@@ -6,9 +6,6 @@
   "main": "dist/index.js",
   "files": ["/dist/*"],
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "pub": "sc && npm publish",
     "test": ". .env && mocha --require ts-node/register --timeout 10000 src/tests/* --colors"
