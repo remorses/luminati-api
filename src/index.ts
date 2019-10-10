@@ -91,14 +91,14 @@ export const createClient = ({ email, password, customer }): Client => {
         if (!zone) {
             throw new Error('zone is needed')
         }
-        return fetch('https://luminati.io/api/remove_ips', {
+        // curl -X DELETE "https://luminati.io/api/zone/ips" -H "Content-Type: application/json" -d '{"customer":"CUSTOMER","zone":"ZONE","ips":["ip1","ip2"]}' -u "username:password"
+        return fetch('https://luminati.io/api/zone/ips', {
             ...defaults,
+            method: 'DELETE',
             body: JSON.stringify({
                 customer,
                 zone,
                 ips,
-                email,
-                password,
             })
         })
             .then(mapErrorToJson)
