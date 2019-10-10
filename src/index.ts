@@ -96,7 +96,9 @@ export const createClient = ({ email, password, customer }): Client => {
             body: JSON.stringify({
                 customer,
                 zone,
-                ips
+                ips,
+                email,
+                password,
             })
         })
             .then(mapErrorToJson)
