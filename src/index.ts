@@ -17,6 +17,8 @@ const mapErrorToJson = async (res) => {
 }
 
 export interface Client {
+    enableZone: ({ zone }) => Promise<any>
+    disableZone: ({ zone }) => Promise<any>
     removeIps(options: { ips: string[]; zone: string }): Promise<string[]>
     addIps(options: {
         count: number
@@ -40,12 +42,12 @@ export const createClient = ({ email, password, customer }): Client => {
         method: 'POST'
     }
     let client: Client = {} as any
-    client.addIps = async ({ count = 1, zone, zonePassword }) => {
+    client.addIps = async ({ count = 1, zone, zonePassword=null }) => {
         // returns only the added ips
         if (!zone) {
             throw new Error('zone is needed')
         }
-        const previousIps = await client.availableIps({ zone, zonePassword })
+        // const previousIps = await client.availableIps({ zone, zonePassword })
         return await fetch('https://luminati.io/api/add_ips', {
             ...defaults,
             body: JSON.stringify({
@@ -60,8 +62,7 @@ export const createClient = ({ email, password, customer }): Client => {
                 return data
             })
             .then((data) => {
-                const all = data.ips
-                return all.filter((ip) => !previousIps.find((x) => x == ip))
+                return data.new_ips
             })
     }
     client.availableIps = ({ zone, zonePassword }) => {
@@ -134,6 +135,29 @@ export const createClient = ({ email, password, customer }): Client => {
                 return data.ips
             })
     }
-
+    const toggleZone = ({ zone, disable }) => {
+        if (!zone) {
+            throw new Error('zone is needed')
+        }
+        // curl -X POST "" -d '{"customer":"CUSTOMER","zone":"ZONE","disable":1}' -u "username:password"
+        return fetch('https://luminati.io/api/zone/change_disable', {
+            ...defaults,
+            body: JSON.stringify({
+                customer,
+                zone,
+                disable,
+            })
+        })
+            .then(mapErrorToJson)
+            .then((data) => {
+                if (!data.ok) throw new Error(data.message)
+                return data
+            })
+            .then((data) => {
+                return data.ips
+            })
+    }
+    client.enableZone = ({zone}) => toggleZone({zone, disable: 0})
+    client.disableZone = ({zone}) => toggleZone({zone, disable: 1})
     return client
 }

@@ -54,3 +54,13 @@ it('removeIps', async() => {
     log('removing ' + ip)
     await client.removeIps({ips: [ip], zone}).then(console.log)
 })
+
+it('enableZone', async() => {
+    const client = createClient({
+        email,
+        password,
+        customer,
+    })
+    const res = (await client.enableZone({zone,}))
+    console.log(res)
+})
